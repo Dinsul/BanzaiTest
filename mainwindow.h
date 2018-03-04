@@ -2,6 +2,10 @@
 #define MAINWINDOW_H
 
 #include <QMainWindow>
+#include <QModelIndex>
+#include "figures/figures.h"
+
+class GLViewer;
 
 namespace Ui {
 class MainWindow;
@@ -17,6 +21,17 @@ public:
 
 private:
     Ui::MainWindow *ui;
+
+    GLViewer *_viewer;
+
+    QVector<Figure*> _figures;
+
+    void createRandomFigure();
+
+private slots:
+    void rowChanged(QModelIndex index);
+    void on_toolButton_add_clicked();
+    void on_toolButton_remove_clicked();
 };
 
 #endif // MAINWINDOW_H

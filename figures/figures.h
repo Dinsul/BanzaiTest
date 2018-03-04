@@ -1,4 +1,4 @@
-#ifndef FIGURES_H
-#define FIGURES_H
-
-#endif // FIGURES_H
+#include "figure.h"
+#include "circle.h"
+#include "square.h"
+#include "triangle.h"
