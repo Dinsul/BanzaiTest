@@ -1,2 +1,10 @@
+TODO list
+ исправить глюк с вылетанием после удаления
+
+05.03.18
+ Add function insertRows() in viewer model
+ Add function removeRows() in viewer model
+ Create dialog fo adding figures
+
 03.03.18
  Strart progect.

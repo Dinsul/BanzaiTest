@@ -10,12 +10,17 @@ class OutlinerModel : public QAbstractTableModel
 public:
     OutlinerModel(QVector<Figure*> *storage);
 
+    void reload(void);
+
     virtual int rowCount(const QModelIndex &parent) const;
     virtual int columnCount(const QModelIndex &parent) const;
     virtual QVariant data(const QModelIndex &index, int role) const;
     virtual bool setData(const QModelIndex &index, const QVariant &value, int role);
+    virtual bool removeRows(int row, int count, const QModelIndex &parent);
+    virtual bool insertRows(int row, int count, const QModelIndex &parent);
 
 private:
+
     QVector<Figure*> *_storage;
 
 };

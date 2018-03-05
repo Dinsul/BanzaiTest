@@ -27,6 +27,7 @@ private:
     QVector<Figure*> _figures;
 
     void createRandomFigure();
+    int  getRandom(int min, int max);
 
 private slots:
     void rowChanged(QModelIndex index);

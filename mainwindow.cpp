@@ -3,6 +3,8 @@
 #include "glviewer.h"
 #include "outlinermodel.h"
 
+#include "time.h"
+
 MainWindow::MainWindow(QWidget *parent) :
     QMainWindow(parent),
     ui(new Ui::MainWindow)
@@ -19,7 +21,7 @@ MainWindow::MainWindow(QWidget *parent) :
     _viewer->show();
 
     //Create random figures
-    for (int i = 0; i < (random() % 3 + 1); ++i)
+    for (int i = 0; i < (getRandom(1, 7)); ++i)
     {
         createRandomFigure();
     }
@@ -52,10 +54,10 @@ MainWindow::~MainWindow()
 
 void MainWindow::createRandomFigure()
 {
-    int type = random() % 3 + 1;
-    int x    = random() % _viewer->width()  - _viewer->width()  / _viewer->scale();
-    int y    = random() % _viewer->height() - _viewer->height() / _viewer->scale();
-    int size = random() % 20 + 10;
+    int type = getRandom(1, 3);
+    int x    = getRandom(0 , _viewer->width()) - _viewer->width()  / _viewer->scale();
+    int y    = getRandom(0, _viewer->height()) - _viewer->height() / _viewer->scale();
+    int size = getRandom(10, 20);
 
     switch (type)
     {
@@ -74,6 +76,17 @@ void MainWindow::createRandomFigure()
     }
 }
 
+int MainWindow::getRandom(int min, int max)
+{
+    static int seed = 3;
+
+    seed += time(NULL) / seed;
+
+    qsrand(seed);
+
+    return qrand() % (max - min) + min;
+}
+
 void MainWindow::rowChanged(QModelIndex index)
 {
     (void) index;
@@ -89,6 +102,7 @@ void MainWindow::rowChanged(QModelIndex index)
 
     for(auto index : indexes)
     {
+        qDebug() << index;
         Figure *chengedFigure = _figures.at(index.row());
 
         chengedFigure->setChanged(true);
@@ -98,6 +112,9 @@ void MainWindow::rowChanged(QModelIndex index)
 void MainWindow::on_toolButton_add_clicked()
 {
     createRandomFigure();
+    OutlinerModel *model = (OutlinerModel *)(ui->tableView_outliner->model());
+
+    model->insertRow(0);
 }
 
 void MainWindow::on_toolButton_remove_clicked()
@@ -106,11 +123,15 @@ void MainWindow::on_toolButton_remove_clicked()
 
     QModelIndexList indexes = selectionModel->selectedIndexes();
 
+    if (indexes.isEmpty())
+    {
+        return;
+    }
+
     for(auto index : indexes)
     {
-        Figure *chengedFigure = _figures.at(index.row());
-        _figures.remove(index.row());
 
-        delete chengedFigure;
+        OutlinerModel *model = (OutlinerModel *)(ui->tableView_outliner->model());
+        model->removeRow(index.row(), QModelIndex());
     }
 }

@@ -1,4 +1,5 @@
 #include "outlinermodel.h"
+#include "dialognewfigure.h"
 
 #include <QDebug>
 
@@ -7,6 +8,12 @@ OutlinerModel::OutlinerModel(QVector<Figure*> *storage) :
     _storage(storage)
 {
 
+}
+
+void OutlinerModel::reload()
+{
+    emit dataChanged(QModelIndex(), QModelIndex());
+    emit layoutChanged();
 }
 
 int OutlinerModel::rowCount(const QModelIndex &parent) const
@@ -64,6 +71,42 @@ bool OutlinerModel::setData(const QModelIndex &index, const QVariant &value, int
     }
 
     emit dataChanged(index, index);
+    emit layoutChanged();
+
+    return true;
+}
+
+bool OutlinerModel::removeRows(int row, int count, const QModelIndex &parent)
+{
+    if (_storage->isEmpty() || row < 0 || row >= _storage->count())
+    {
+        return false;
+    }
+
+    Figure *chengedFigure = _storage->at(row);
+    _storage->remove(row);
+
+    delete chengedFigure;
+
+    emit dataChanged(parent, parent);
+    emit layoutChanged();
+
+    return true;
+}
+
+bool OutlinerModel::insertRows(int row, int count, const QModelIndex &parent)
+{
+    Figure *newFigure;
+
+    DialogNewFigure dialog(&newFigure);
+    dialog.exec();
+
+    if (newFigure)
+    {
+        _storage->append(newFigure);
+    }
+
+    emit dataChanged(parent, parent);
     emit layoutChanged();
 
     return true;

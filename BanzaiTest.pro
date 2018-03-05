@@ -20,7 +20,8 @@ SOURCES += main.cpp\
     figures/square.cpp \
     figures/triangle.cpp \
     glviewer.cpp \
-    outlinermodel.cpp
+    outlinermodel.cpp \
+    dialognewfigure.cpp
 
 HEADERS  += mainwindow.h \
     figures/circle.h \
@@ -29,9 +30,14 @@ HEADERS  += mainwindow.h \
     figures/triangle.h \
     figures/figures.h \
     glviewer.h \
-    outlinermodel.h
+    outlinermodel.h \
+    dialognewfigure.h
 
-FORMS    += mainwindow.ui
+FORMS    += mainwindow.ui \
+    dialognewfigure.ui
 
 DISTFILES += \
+    changelog.txt
+
+OTHER_FILES += \
     changelog.txt
