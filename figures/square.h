@@ -7,24 +7,21 @@ class Square : public Figure
 {
 public:
     Square(QString name, int size, QPoint position,
-           uint32_t color = 0x64640000, float LineWidthChanged = 4.0);
+           uint32_t color = 0x64640000, double lineWidthChanged = 4.0);
 
-    virtual void draw();
 
-    void setLineWidthChajnged(const float LineWidthChajnged);
+    void draw();
     void setSize(int size);
-
-    GLfloat LineWidthChajnged() const;
-
     int  size() const;
+
+    void  setLineWidthChanged(double lineWidth);
+    double lineWidthChanged() const;
 
 private:
     void applySize(int size);
-    void addVertex(){}
-    void clearVertexes(){}
 
-    int     _edgeSize;
-    GLfloat _LineWidthChajnged;
+    int    _edgeSize;
+    double _lineWidthChanged;
 };
 
 #endif // SQUARE_H

@@ -52,7 +52,7 @@ bool Figure::changed() const
     return _changed;
 }
 
-GLfloat Figure::LineWidth() const
+float Figure::LineWidth() const
 {
     return _lineWidth;
 }
@@ -77,7 +77,7 @@ void Figure::setPosition(const QPoint &position)
     _position = position;
 }
 
-void Figure::setLineWidth(const GLfloat LineWidth)
+void Figure::setLineWidth(float LineWidth)
 {
     _lineWidth = LineWidth;
 }

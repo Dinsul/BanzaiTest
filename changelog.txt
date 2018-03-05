@@ -1,5 +1,8 @@
+
 05.03.18
-<<<<<<< HEAD
+ Fixed bug with squre trans
+
+05.03.18
  Adding icons "+" and "-"
  Adding name collum
  Added methods size() and setSeze()
@@ -8,9 +11,6 @@
 
 05.03.18
  Remove custom figure from creting form
-=======
- Remote custom figure from creting form
->>>>>>> 9288ee790ce616623c82f8ddc97f8713d9c43980
  Fixed bug with circle effect color
  Fixed bug with selected cells after removing
 

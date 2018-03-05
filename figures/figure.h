@@ -35,13 +35,13 @@ public:
     void setColor(uint32_t argb);
     void setColor(char alpha, char red, char green, char blue);
     void setChanged(bool changed);
-    void setLineWidth(const GLfloat LineWidth);
+    void setLineWidth(float LineWidth);
     void setPosition(const QPoint &position);
     void setName(const QString &name);
 
     bool changed() const;
     QPoint position() const;
-    GLfloat LineWidth() const;
+    float LineWidth() const;
     QString name() const;
 
 protected:

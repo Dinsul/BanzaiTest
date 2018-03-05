@@ -28,15 +28,25 @@ void Triangle::applySize(int radius)
         _vertexes.append(QPoint((int)x, (int)y));
     }
 }
+double Triangle::scaleChanged() const
+{
+    return _scaleChanged;
+}
+
+void Triangle::setScaleChanged(double scaleChanged)
+{
+    _scaleChanged = scaleChanged;
+}
+
 
 void Triangle::draw()
 {
     glPushMatrix();
     glTranslatef(_position.x(), _position.y(), 0);
-
+    
     if (_changed)
     {
-           glScalef(_scaleChanged, _scaleChanged, 1);
+        glScalef(_scaleChanged, _scaleChanged, 1);
     }
 
     glLineWidth(_lineWidth);

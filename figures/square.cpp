@@ -3,10 +3,10 @@
 
 #include <QDebug>
 
-Square::Square(QString name, int edgeSize, QPoint position, uint32_t color, float LineWidthChanged) :
+Square::Square(QString name, int edgeSize, QPoint position, uint32_t color, double lineWidthChanged) :
     Figure(name, position, color),
     _edgeSize(edgeSize),
-    _LineWidthChajnged(LineWidthChanged)
+    _lineWidthChanged(lineWidthChanged)
 {
     applySize(edgeSize);
 
@@ -20,7 +20,7 @@ void Square::draw()
 
     if (_changed)
     {
-        glLineWidth(_LineWidthChajnged);
+        glLineWidth(_lineWidthChanged);
     }
     else
     {
@@ -49,23 +49,24 @@ void Square::applySize(int edgeSize)
     _vertexes.append(QPoint( edgeSize,  edgeSize));
 }
 
-GLfloat Square::LineWidthChajnged() const
+double Square::lineWidthChanged() const
 {
-    return _LineWidthChajnged;
+    return _lineWidthChanged;
 }
+
 int Square::size() const
 {
     return _edgeSize;
 }
 
-void Square::setSize(int edgeSize)
+void Square::setSize(int size)
 {
-    _edgeSize = edgeSize;
+    _edgeSize = size;
     applySize(_edgeSize);
 }
 
 
-void Square::setLineWidthChajnged(const float LineWidthChajnged)
+void Square::setLineWidthChanged(double lineWidth)
 {
-    _LineWidthChajnged = LineWidthChajnged;
+    _lineWidthChanged = lineWidth;
 }
