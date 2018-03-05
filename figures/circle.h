@@ -7,26 +7,29 @@ class Circle : public Figure
 {
 public:
 
-    Circle(QString name, double radius, QPoint position,
+    Circle(QString name, int radius, QPoint position,
            uint32_t color = 0x64640000, uint32_t colorChanged = 0x64000064,
            int segments = 128);
 
     void draw();
 
-    void setRadius(double radius);
     void setSegments(const uint32_t &segments);
+    void setSize(int size);
 
-    uint32_t segments() const;
+    int segments() const;
+    int  size() const;
 
 private:
+    void applySize(int size);
     void addVertex(){}
     void clearVertexes(){}
 
+    int         _radius;
+    int         _segments;
     GLbyte      _colorAlphaChanged;
     GLbyte      _colorRedChanged;
     GLbyte      _colorGreenChanged;
     GLbyte      _colorBlueChanged;
-    uint32_t    _segments;
 };
 
 

@@ -6,17 +6,18 @@
 #endif
 
 
-Triangle::Triangle(QString name, double radiusOfCircumcircle, QPoint position, uint32_t color, double scaleChanged) :
+Triangle::Triangle(QString name, int radiusOfCircumcircle, QPoint position, uint32_t color, double scaleChanged) :
     Figure(name, position, color),
+    _radiusOfCircumcircle(radiusOfCircumcircle),
     _scaleChanged(scaleChanged)
 {
-    setRadiusOfCircumcircle(radiusOfCircumcircle);
+    applySize(radiusOfCircumcircle);
     _type = FtTriangle;
 }
 
-void Triangle::setRadiusOfCircumcircle(double radius)
+void Triangle::applySize(int radius)
 {
-    for (uint32_t i = 0; i < 3; ++i)
+    for (int i = 0; i < 3; ++i)
     {
         // currentAngle in radians. 2 * PI full circle
         // full circle devision on segments count and multiple on current segmetn
@@ -53,3 +54,14 @@ void Triangle::draw()
 
     glPopMatrix();
 }
+int Triangle::size() const
+{
+    return _radiusOfCircumcircle;
+}
+
+void Triangle::setSize(int radiusOfCircumcircle)
+{
+    _radiusOfCircumcircle = radiusOfCircumcircle;
+    applySize(_radiusOfCircumcircle);
+}
+

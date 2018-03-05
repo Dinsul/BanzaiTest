@@ -5,9 +5,10 @@
 
 Square::Square(QString name, int edgeSize, QPoint position, uint32_t color, float LineWidthChanged) :
     Figure(name, position, color),
+    _edgeSize(edgeSize),
     _LineWidthChajnged(LineWidthChanged)
 {
-    setEdgeSize(edgeSize);
+    applySize(edgeSize);
 
     _type = FtSquare;
 }
@@ -40,18 +41,29 @@ void Square::draw()
     glPopMatrix();
 }
 
-void Square::setEdgeSize(int edgeSize)
+void Square::applySize(int edgeSize)
 {
-    _vertexes.append(QPoint(0, 0));
-    _vertexes.append(QPoint(0, edgeSize));
-    _vertexes.append(QPoint(edgeSize, edgeSize));
-    _vertexes.append(QPoint(edgeSize, 0));
+    _vertexes.append(QPoint(-edgeSize,  edgeSize));
+    _vertexes.append(QPoint(-edgeSize, -edgeSize));
+    _vertexes.append(QPoint( edgeSize, -edgeSize));
+    _vertexes.append(QPoint( edgeSize,  edgeSize));
 }
 
 GLfloat Square::LineWidthChajnged() const
 {
     return _LineWidthChajnged;
 }
+int Square::size() const
+{
+    return _edgeSize;
+}
+
+void Square::setSize(int edgeSize)
+{
+    _edgeSize = edgeSize;
+    applySize(_edgeSize);
+}
+
 
 void Square::setLineWidthChajnged(const float LineWidthChajnged)
 {

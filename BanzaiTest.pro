@@ -41,3 +41,6 @@ DISTFILES += \
 
 OTHER_FILES += \
     changelog.txt
+
+RESOURCES += \
+    resurses.qrc

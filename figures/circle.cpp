@@ -5,30 +5,31 @@
 #define PI 3.14159
 #endif
 
-Circle::Circle(QString name, double radius, QPoint position, uint32_t color, uint32_t colorChanged, int segments) :
+Circle::Circle(QString name, int radius, QPoint position, uint32_t color, uint32_t colorChanged, int segments) :
     Figure(name, position, color),
+    _radius(radius),
+    _segments(segments),
     _colorAlphaChanged ((colorChanged & 0xFF000000) >> 24),
     _colorRedChanged   ((colorChanged & 0x00FF0000) >> 16),
     _colorGreenChanged ((colorChanged & 0x0000FF00) >> 8),
-    _colorBlueChanged  (colorChanged & 0x000000FF),
-    _segments(segments)
+    _colorBlueChanged  (colorChanged & 0x000000FF)
 
 {
-    setRadius(radius);
+    applySize(_radius);
     _type = FtCircle;
 }
 
-void Circle::setRadius(double radius)
+void Circle::applySize(int radius)
 {
-    for (uint32_t i = 0; i < _segments; ++i)
+    for (int i = 0; i < _segments; ++i)
     {
         // currentAngle in radians. 2 * PI full circle
         // full circle devision on segments count and multiple on current segmetn
         double currentAngle = 2 * PI / _segments * i;
-        double x = sin(currentAngle) * radius;
-        double y = cos(currentAngle) * radius;
+        int x = sin(currentAngle) * radius;
+        int y = cos(currentAngle) * radius;
 
-        _vertexes.append(QPoint((int)x, (int)y));
+        _vertexes.append(QPoint(x, y));
     }
 }
 
@@ -60,10 +61,22 @@ void Circle::draw()
     glPopMatrix();
 }
 
-uint32_t Circle::segments() const
+int Circle::segments() const
 {
     return _segments;
 }
+
+int Circle::size() const
+{
+    return _radius;
+}
+
+void Circle::setSize(int radius)
+{
+    _radius = radius;
+    applySize(_radius);
+}
+
 
 void Circle::setSegments(const uint32_t &segments)
 {

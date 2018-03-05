@@ -19,6 +19,7 @@ Figure::Figure(QString name, int x, int y, uint32_t color, float lineWidth) :
 {
 }
 
+
 Figure::~Figure()
 {
 
@@ -44,16 +45,6 @@ void Figure::setColor(char alpha, char red, char green, char blue)
     _colorGreen = green;
     _colorBlue  = blue;
 
-}
-
-void Figure::addVertex(QPoint vertex)
-{
-    _vertexes.append(vertex);
-}
-
-void Figure::clearVertexes()
-{
-    _vertexes.clear();
 }
 
 bool Figure::changed() const

@@ -27,13 +27,13 @@ public:
 
     virtual void draw();
 
+    virtual void setSize(int size) = 0;
+    virtual int  size() const = 0;
 
     FigureType type() const;
 
     void setColor(uint32_t argb);
     void setColor(char alpha, char red, char green, char blue);
-    void addVertex(QPoint vertex);
-    void clearVertexes(void);
     void setChanged(bool changed);
     void setLineWidth(const GLfloat LineWidth);
     void setPosition(const QPoint &position);

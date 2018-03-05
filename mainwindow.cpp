@@ -2,8 +2,9 @@
 #include "ui_mainwindow.h"
 #include "glviewer.h"
 #include "outlinermodel.h"
+#include "dialognewfigure.h"
 
-#include "time.h"
+#include <QTime>
 
 MainWindow::MainWindow(QWidget *parent) :
     QMainWindow(parent),
@@ -30,6 +31,7 @@ MainWindow::MainWindow(QWidget *parent) :
     QAbstractItemModel *oldModel = ui->tableView_outliner->model();
 
     connect(ui->tableView_outliner, SIGNAL(clicked(QModelIndex)), this, SLOT(rowChanged(QModelIndex)));
+    connect(ui->tableView_outliner, SIGNAL(doubleClicked(QModelIndex)), this, SLOT(editElement(QModelIndex)));
 
     ui->tableView_outliner->setModel(model);
     ui->tableView_outliner->setSelectionMode(QAbstractItemView::MultiSelection);
@@ -78,9 +80,9 @@ void MainWindow::createRandomFigure()
 
 int MainWindow::getRandom(int min, int max)
 {
-    static int seed = 3;
+    static int seed;
 
-    seed += time(NULL) / seed;
+    seed += QTime::currentTime().msec();
 
     qsrand(seed);
 
@@ -106,6 +108,17 @@ void MainWindow::rowChanged(QModelIndex index)
 
         chengedFigure->setChanged(true);
     }
+}
+
+void MainWindow::editElement(QModelIndex index)
+{
+    ui->tableView_outliner->reset();
+    Figure *figureToEdit = _figures.value(index.row());
+
+    DialogNewFigure dialog(&figureToEdit);
+    dialog.exec();
+
+    ui->tableView_outliner->selectRow(index.row());
 }
 
 void MainWindow::on_toolButton_add_clicked()

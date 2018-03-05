@@ -31,6 +31,7 @@ private:
 
 private slots:
     void rowChanged(QModelIndex index);
+    void editElement(QModelIndex index);
     void on_toolButton_add_clicked();
     void on_toolButton_remove_clicked();
 };

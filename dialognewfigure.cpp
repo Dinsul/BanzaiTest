@@ -3,17 +3,51 @@
 
 #include "figures/figures.h"
 
-DialogNewFigure::DialogNewFigure(Figure **newFigure, QWidget *parent) :
+DialogNewFigure::DialogNewFigure(Figure **figure, QWidget *parent) :
     QDialog(parent),
     ui(new Ui::DialogNewFigure),
-    _newFigure(newFigure)
+    _figure(figure)
 {
     ui->setupUi(this);
 
-    *_newFigure = NULL;
+    Figure *tempFigure = *figure;
 
-    ui->groupBox_sizeEffect->hide();
-    ui->groupBox_zoomEffect->hide();
+    if (tempFigure == NULL)
+    {
+        ui->groupBox_sizeEffect->hide();
+        ui->groupBox_zoomEffect->hide();
+    }
+    else
+    {
+        ui->lineEdit_name->setText(tempFigure->name());
+        ui->spinBox_xPos->setValue(tempFigure->position().x());
+        ui->spinBox_yPos->setValue(tempFigure->position().y());
+        ui->spinBox_size->setValue(tempFigure->size());
+
+        switch (tempFigure->type())
+        {
+        case Figure::FtCircle:
+            ui->groupBox_sizeEffect->hide();
+            ui->groupBox_zoomEffect->hide();
+            ui->comboBox_type->setCurrentIndex(0);
+            break;
+        case Figure::FtSquare:
+            ui->groupBox_colorEffect->hide();
+            ui->groupBox_zoomEffect->hide();
+            ui->comboBox_type->setCurrentIndex(1);
+            break;
+        case Figure::FtTriangle:
+            ui->groupBox_colorEffect->hide();
+            ui->groupBox_sizeEffect->hide();
+            ui->comboBox_type->setCurrentIndex(2);
+            break;
+        default:
+            ui->groupBox_colorEffect->hide();
+            ui->groupBox_sizeEffect->hide();
+            ui->groupBox_zoomEffect->hide();
+            break;
+        }
+    }
 
     this->resize(QSize());
 }
@@ -53,13 +87,19 @@ void DialogNewFigure::on_comboBox_type_activated(int index)
 
 void DialogNewFigure::on_buttonBox_accepted()
 {
-    uint32_t color = 0;
+    if (*_figure)
+    {
+        delete *_figure;
+    }
+
+    uint32_t color       = 0;
     uint32_t colorEffect = 0;
 
     color ^= ~((u_int8_t)(ui->spinBox_alpa->value())  << 24);
     color ^= ~((u_int8_t)(ui->spinBox_red->value())   << 16);
     color ^= ~((u_int8_t)(ui->spinBox_green->value()) << 8);
     color ^= ~((u_int8_t)(ui->spinBox_blue->value()));
+
     switch (ui->comboBox_type->currentIndex())
     {
     case 0:
@@ -68,25 +108,25 @@ void DialogNewFigure::on_buttonBox_accepted()
         colorEffect ^= ~((u_int8_t)(ui->spinBox_greenEffect->value()) << 8);
         colorEffect ^= ~((u_int8_t)(ui->spinBox_blueEffect->value()));
 
-        *_newFigure = new Circle(ui->lineEdit_name->text(),
+        *_figure = new Circle(ui->lineEdit_name->text(),
                                 ui->spinBox_size->value(),
                                 QPoint(ui->spinBox_xPos->value(), ui->spinBox_yPos->value()),
                                 color, colorEffect);
         break;
     case 1:
-        *_newFigure = new Square(ui->lineEdit_name->text(),
+        *_figure = new Square(ui->lineEdit_name->text(),
                                 ui->spinBox_size->value(),
                                 QPoint(ui->spinBox_xPos->value(), ui->spinBox_yPos->value()),
                                 color, ui->spinBox_sizeEffect->value());
         break;
     case 2:
-        *_newFigure = new Triangle(ui->lineEdit_name->text(),
+        *_figure = new Triangle(ui->lineEdit_name->text(),
                                 ui->spinBox_size->value(),
                                 QPoint(ui->spinBox_xPos->value(), ui->spinBox_yPos->value()),
                                 color, ui->doubleSpinBox_zoomEffect->value());
         break;
     default:
-        *_newFigure = NULL;
+        *_figure = NULL;
         break;
     }
 }

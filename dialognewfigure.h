@@ -14,17 +14,16 @@ class DialogNewFigure : public QDialog
     Q_OBJECT
 
 public:
-    explicit DialogNewFigure(Figure **newFigure, QWidget *parent = 0);
+    explicit DialogNewFigure(Figure **figure, QWidget *parent = 0);
     ~DialogNewFigure();
 
 private slots:
     void on_comboBox_type_activated(int index);
-
     void on_buttonBox_accepted();
 
 private:
     Ui::DialogNewFigure *ui;
-    Figure **_newFigure;
+    Figure **_figure;
 };
 
 #endif // DIALOGNEWFIGURE_H

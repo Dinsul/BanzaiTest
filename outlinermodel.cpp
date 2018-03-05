@@ -18,11 +18,14 @@ void OutlinerModel::reload()
 
 int OutlinerModel::rowCount(const QModelIndex &parent) const
 {
+    (void) parent;
     return _storage->count();
 }
 
 int OutlinerModel::columnCount(const QModelIndex &parent) const
 {
+    (void) parent;
+
     return 1;
 }
 
@@ -56,6 +59,20 @@ QVariant OutlinerModel::data(const QModelIndex &index, int role) const
     return QVariant();
 }
 
+QVariant OutlinerModel::headerData(int section, Qt::Orientation orientation, int role) const
+{
+    if (role == Qt::DisplayRole && orientation == Qt::Horizontal)
+    {
+        return QVariant(QString("Objects"));
+    }
+    else if (role == Qt::DisplayRole && orientation == Qt::Vertical)
+    {
+        return section + 1;
+    }
+
+    return QVariant();
+}
+
 bool OutlinerModel::setData(const QModelIndex &index, const QVariant &value, int role)
 {
     if (value.isNull())
@@ -78,6 +95,8 @@ bool OutlinerModel::setData(const QModelIndex &index, const QVariant &value, int
 
 bool OutlinerModel::removeRows(int row, int count, const QModelIndex &parent)
 {
+    (void) count;
+
     if (_storage->isEmpty() || row < 0 || row >= _storage->count())
     {
         return false;
@@ -96,7 +115,10 @@ bool OutlinerModel::removeRows(int row, int count, const QModelIndex &parent)
 
 bool OutlinerModel::insertRows(int row, int count, const QModelIndex &parent)
 {
-    Figure *newFigure;
+    (void) row;
+    (void) count;
+
+    Figure *newFigure = NULL;
 
     DialogNewFigure dialog(&newFigure);
     dialog.exec();
