@@ -71,11 +71,6 @@
        <widget class="QComboBox" name="comboBox_type">
         <item>
          <property name="text">
-          <string>Custom</string>
-         </property>
-        </item>
-        <item>
-         <property name="text">
           <string>Circle</string>
          </property>
         </item>

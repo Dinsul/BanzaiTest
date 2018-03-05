@@ -7,9 +7,9 @@
 
 Circle::Circle(QString name, double radius, QPoint position, uint32_t color, uint32_t colorChanged, int segments) :
     Figure(name, position, color),
-    _colorAlphaChanged (colorChanged & 0xFF000000 >> 24),
-    _colorRedChanged   (colorChanged & 0x00FF0000 >> 16),
-    _colorGreenChanged (colorChanged & 0x0000FF00 >> 8),
+    _colorAlphaChanged ((colorChanged & 0xFF000000) >> 24),
+    _colorRedChanged   ((colorChanged & 0x00FF0000) >> 16),
+    _colorGreenChanged ((colorChanged & 0x0000FF00) >> 8),
     _colorBlueChanged  (colorChanged & 0x000000FF),
     _segments(segments)
 

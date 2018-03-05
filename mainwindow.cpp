@@ -102,7 +102,6 @@ void MainWindow::rowChanged(QModelIndex index)
 
     for(auto index : indexes)
     {
-        qDebug() << index;
         Figure *chengedFigure = _figures.at(index.row());
 
         chengedFigure->setChanged(true);
@@ -111,7 +110,6 @@ void MainWindow::rowChanged(QModelIndex index)
 
 void MainWindow::on_toolButton_add_clicked()
 {
-    createRandomFigure();
     OutlinerModel *model = (OutlinerModel *)(ui->tableView_outliner->model());
 
     model->insertRow(0);
@@ -130,8 +128,9 @@ void MainWindow::on_toolButton_remove_clicked()
 
     for(auto index : indexes)
     {
-
         OutlinerModel *model = (OutlinerModel *)(ui->tableView_outliner->model());
         model->removeRow(index.row(), QModelIndex());
     }
+
+    ui->tableView_outliner->reset();
 }
