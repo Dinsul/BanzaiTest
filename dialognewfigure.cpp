@@ -10,7 +10,8 @@ DialogNewFigure::DialogNewFigure(Figure **newFigure, QWidget *parent) :
 {
     ui->setupUi(this);
 
-    ui->groupBox_colorEffect->hide();
+    *_newFigure = NULL;
+
     ui->groupBox_sizeEffect->hide();
     ui->groupBox_zoomEffect->hide();
 
@@ -26,17 +27,17 @@ void DialogNewFigure::on_comboBox_type_activated(int index)
 {
     switch (index)
     {
-    case 1:
+    case 0:
         ui->groupBox_colorEffect->show();
         ui->groupBox_sizeEffect->hide();
         ui->groupBox_zoomEffect->hide();
         break;
-    case 2:
+    case 1:
         ui->groupBox_colorEffect->hide();
         ui->groupBox_sizeEffect->show();
         ui->groupBox_zoomEffect->hide();
         break;
-    case 3:
+    case 2:
         ui->groupBox_colorEffect->hide();
         ui->groupBox_sizeEffect->hide();
         ui->groupBox_zoomEffect->show();
@@ -61,7 +62,7 @@ void DialogNewFigure::on_buttonBox_accepted()
     color ^= ~((u_int8_t)(ui->spinBox_blue->value()));
     switch (ui->comboBox_type->currentIndex())
     {
-    case 1:
+    case 0:
         colorEffect ^= ~((u_int8_t)(ui->spinBox_alpaEffect->value())  << 24);
         colorEffect ^= ~((u_int8_t)(ui->spinBox_redEffect->value())   << 16);
         colorEffect ^= ~((u_int8_t)(ui->spinBox_greenEffect->value()) << 8);
@@ -72,13 +73,13 @@ void DialogNewFigure::on_buttonBox_accepted()
                                 QPoint(ui->spinBox_xPos->value(), ui->spinBox_yPos->value()),
                                 color, colorEffect);
         break;
-    case 2:
+    case 1:
         *_newFigure = new Square(ui->lineEdit_name->text(),
                                 ui->spinBox_size->value(),
                                 QPoint(ui->spinBox_xPos->value(), ui->spinBox_yPos->value()),
                                 color, ui->spinBox_sizeEffect->value());
         break;
-    case 3:
+    case 2:
         *_newFigure = new Triangle(ui->lineEdit_name->text(),
                                 ui->spinBox_size->value(),
                                 QPoint(ui->spinBox_xPos->value(), ui->spinBox_yPos->value()),

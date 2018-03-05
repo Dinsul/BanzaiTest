@@ -72,49 +72,6 @@ void GLViewer::paintGL()
     {
         figure->draw();
     }
-
-}
-
-void GLViewer::keyPressEvent(QKeyEvent *keyEvent)
-{
-    int key = keyEvent->key();
-
-    switch (key)
-    {
-    case Qt::Key_Plus:
-        _scale += 0.1;
-        break;
-    case Qt::Key_Minus:
-        _scale -= 0.1;
-        break;
-    case Qt::Key_Shift:
-        for (auto *figure : *_figures)
-        {
-            figure->setChanged(true);
-        }
-        break;
-    default:
-        break;
-    }
-
-}
-
-void GLViewer::keyReleaseEvent(QKeyEvent *keyEvent)
-{
-    int key = keyEvent->key();
-
-    switch (key)
-    {
-    case Qt::Key_Shift:
-        for (auto *figure : *_figures)
-        {
-            figure->setChanged(false);
-        }
-        break;
-    default:
-        break;
-    }
-
 }
 
 void GLViewer::update()
