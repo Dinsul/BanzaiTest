@@ -3,6 +3,7 @@
  Adding name collum
  Added methods size() and setSeze()
  Added figures editing
+ Fixed getRandom()
 
 05.03.18
  Remove custom figure from creting form

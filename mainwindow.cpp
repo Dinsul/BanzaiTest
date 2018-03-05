@@ -86,7 +86,7 @@ int MainWindow::getRandom(int min, int max)
 
     qsrand(seed);
 
-    return qrand() % (max - min) + min;
+    return qrand() % (max - min + 1) + min;
 }
 
 void MainWindow::rowChanged(QModelIndex index)

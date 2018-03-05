@@ -21,8 +21,8 @@ public:
     enum FigureType{
         FtCustom = 0,
         FtCircle,
-        FtTriangle,
-        FtSquare
+        FtSquare,
+        FtTriangle
     };
 
     virtual void draw();
