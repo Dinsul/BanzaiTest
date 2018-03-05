@@ -109,15 +109,15 @@ void DialogNewFigure::on_buttonBox_accepted()
         colorEffect ^= ~((u_int8_t)(ui->spinBox_blueEffect->value()));
 
         *_figure = new Circle(ui->lineEdit_name->text(),
-                                ui->spinBox_size->value(),
-                                QPoint(ui->spinBox_xPos->value(), ui->spinBox_yPos->value()),
-                                color, colorEffect);
+                              ui->spinBox_size->value(),
+                              QPoint(ui->spinBox_xPos->value(), ui->spinBox_yPos->value()),
+                              color, colorEffect);
         break;
     case 1:
         *_figure = new Square(ui->lineEdit_name->text(),
-                                ui->spinBox_size->value(),
-                                QPoint(ui->spinBox_xPos->value(), ui->spinBox_yPos->value()),
-                                color, ui->spinBox_sizeEffect->value());
+                              ui->spinBox_size->value(),
+                              QPoint(ui->spinBox_xPos->value(), ui->spinBox_yPos->value()),
+                              color, ui->spinBox_sizeEffect->value());
         break;
     case 2:
         *_figure = new Triangle(ui->lineEdit_name->text(),

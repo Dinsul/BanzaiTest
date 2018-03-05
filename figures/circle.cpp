@@ -13,7 +13,6 @@ Circle::Circle(QString name, int radius, QPoint position, uint32_t color, uint32
     _colorRedChanged   ((colorChanged & 0x00FF0000) >> 16),
     _colorGreenChanged ((colorChanged & 0x0000FF00) >> 8),
     _colorBlueChanged  (colorChanged & 0x000000FF)
-
 {
     applySize(_radius);
     _type = FtCircle;
