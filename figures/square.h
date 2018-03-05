@@ -7,7 +7,7 @@ class Square : public Figure
 {
 public:
     Square(QString name, int size, QPoint position,
-           uint32_t color = 0x64640000, double lineWidthChanged = 4.0);
+           uint32_t color = 0x7F640000, double lineWidthChanged = 4.0);
 
 
     void draw();

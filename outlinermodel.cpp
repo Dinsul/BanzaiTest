@@ -1,8 +1,6 @@
 #include "outlinermodel.h"
 #include "dialognewfigure.h"
 
-#include <QDebug>
-
 OutlinerModel::OutlinerModel(QVector<Figure*> *storage) :
     QAbstractTableModel(),
     _storage(storage)
@@ -120,7 +118,7 @@ bool OutlinerModel::insertRows(int row, int count, const QModelIndex &parent)
 
     Figure *newFigure = NULL;
 
-    DialogNewFigure dialog(&newFigure);
+    DialogNewFigure dialog(_storage, -1);
     dialog.exec();
 
     if (newFigure)

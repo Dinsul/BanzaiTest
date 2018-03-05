@@ -1,10 +1,12 @@
 
 05.03.18
- Fixed bug with squre trans
+ Fixed bug with sfigur editing
+ Refactored DialogNewFiguge
+ Created new random functions
 
 05.03.18
- Adding icons "+" and "-"
- Adding name collum
+ Added icons "+" and "-"
+ Added name collum
  Added methods size() and setSeze()
  Added figures editing
  Fixed getRandom()

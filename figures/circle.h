@@ -7,7 +7,7 @@ class Circle : public Figure
 {
 public:
     Circle(QString name, int radius, QPoint position,
-           uint32_t color = 0x64640000, uint32_t colorChanged = 0x64000064,
+           uint32_t color = 0x7F640000, uint32_t colorChanged = 0x6F005564,
            int segments = 128);
 
     void draw();

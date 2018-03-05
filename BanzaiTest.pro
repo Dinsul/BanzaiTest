@@ -21,7 +21,8 @@ SOURCES += main.cpp\
     figures/triangle.cpp \
     glviewer.cpp \
     outlinermodel.cpp \
-    dialognewfigure.cpp
+    dialognewfigure.cpp \
+    myrandom.cpp
 
 HEADERS  += mainwindow.h \
     figures/circle.h \
@@ -31,7 +32,8 @@ HEADERS  += mainwindow.h \
     figures/figures.h \
     glviewer.h \
     outlinermodel.h \
-    dialognewfigure.h
+    dialognewfigure.h \
+    myrandom.h
 
 FORMS    += mainwindow.ui \
     dialognewfigure.ui

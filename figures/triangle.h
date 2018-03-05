@@ -7,7 +7,7 @@ class Triangle : public Figure
 {
 public:
     Triangle(QString name, int radiusOfCircumcircle, QPoint position,
-             uint32_t color = 0x64640000, double scaleChanged = 1.2);
+             uint32_t color = 0x7F640000, double scaleChanged = 1.2);
 
 
     void draw();

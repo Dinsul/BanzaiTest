@@ -14,7 +14,7 @@ class DialogNewFigure : public QDialog
     Q_OBJECT
 
 public:
-    explicit DialogNewFigure(Figure **figure, QWidget *parent = 0);
+    explicit DialogNewFigure(QVector<Figure *> *storage, int index, QWidget *parent = 0);
     ~DialogNewFigure();
 
 private slots:
@@ -23,7 +23,9 @@ private slots:
 
 private:
     Ui::DialogNewFigure *ui;
-    Figure **_figure;
+    QVector<Figure *>   *_storage;
+    Figure              *_figure;
+    int                  _index;
 };
 
 #endif // DIALOGNEWFIGURE_H
