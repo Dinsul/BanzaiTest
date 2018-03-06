@@ -1,6 +1,5 @@
 #include "square.h"
 
-
 #include <QDebug>
 
 Square::Square(QString name, int edgeSize, QPoint position, uint32_t color, double lineWidthChanged) :
