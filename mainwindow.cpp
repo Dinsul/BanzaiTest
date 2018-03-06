@@ -3,6 +3,7 @@
 #include "glviewer.h"
 #include "outlinermodel.h"
 #include "dialognewfigure.h"
+#include "myrandom.h"
 
 #include <QTime>
 
@@ -22,7 +23,9 @@ MainWindow::MainWindow(QWidget *parent) :
     _viewer->show();
 
     //Create random figures
-    for (int i = 0; i < (getRandom(1, 7)); ++i)
+    int counts = getRandomRange(1, 7);
+
+    for (int i = 0; i < counts; ++i)
     {
         createRandomFigure();
     }
@@ -30,13 +33,14 @@ MainWindow::MainWindow(QWidget *parent) :
     OutlinerModel      *model    = new OutlinerModel(&_figures);
     QAbstractItemModel *oldModel = ui->tableView_outliner->model();
 
-    connect(ui->tableView_outliner, SIGNAL(clicked(QModelIndex)), this, SLOT(rowChanged(QModelIndex)));
+    connect(ui->tableView_outliner, SIGNAL(clicked(QModelIndex)), this, SLOT(elementWasClicked(QModelIndex)));
     connect(ui->tableView_outliner, SIGNAL(doubleClicked(QModelIndex)), this, SLOT(editElement(QModelIndex)));
 
     ui->tableView_outliner->setModel(model);
     ui->tableView_outliner->setSelectionMode(QAbstractItemView::MultiSelection);
 
     ui->tableView_outliner->horizontalHeader()->setSectionResizeMode(QHeaderView::Stretch);
+
     if (oldModel)
     {
         delete oldModel;
@@ -56,10 +60,10 @@ MainWindow::~MainWindow()
 
 void MainWindow::createRandomFigure()
 {
-    int type = getRandom(1, 3);
-    int x    = getRandom(0 , _viewer->width()) - _viewer->width()  / _viewer->scale();
-    int y    = getRandom(0, _viewer->height()) - _viewer->height() / _viewer->scale();
-    int size = getRandom(10, 20);
+    int type = getRandomRange(1, 3);
+    int x    = getRandomRange(0, _viewer->width())  - _viewer->width()  / _viewer->scale();
+    int y    = getRandomRange(0, _viewer->height()) - _viewer->height() / _viewer->scale();
+    int size = getRandomRange(10, 20);
 
     switch (type)
     {
@@ -78,44 +82,25 @@ void MainWindow::createRandomFigure()
     }
 }
 
-int MainWindow::getRandom(int min, int max)
+void MainWindow::elementWasClicked(QModelIndex index)
 {
-    static int seed;
+    QTableView* table = (QTableView*)sender();
 
-    seed += QTime::currentTime().msec();
-
-    qsrand(seed);
-
-    return qrand() % (max - min + 1) + min;
-}
-
-void MainWindow::rowChanged(QModelIndex index)
-{
-    (void) index;
-
-    QItemSelectionModel *selectionModel = ((QTableView*)sender())->selectionModel();
-
-    QModelIndexList indexes = selectionModel->selectedIndexes();
-
-    for(auto *figure : _figures)
+    if (table->selectionModel()->isSelected(index))
     {
-        figure->setChanged(false);
+        _figures.at(index.row())->setChanged(true);
     }
-
-    for(auto index : indexes)
+    else
     {
-        Figure *chengedFigure = _figures.at(index.row());
-
-        chengedFigure->setChanged(true);
+        _figures.at(index.row())->setChanged(false);
     }
 }
 
 void MainWindow::editElement(QModelIndex index)
 {
     ui->tableView_outliner->reset();
-    Figure *figureToEdit = _figures.value(index.row());
 
-    DialogNewFigure dialog(&figureToEdit);
+    DialogNewFigure dialog(&_figures, index.row());
     dialog.exec();
 
     ui->tableView_outliner->selectRow(index.row());

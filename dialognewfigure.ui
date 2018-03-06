@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>379</width>
-    <height>488</height>
+    <height>535</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -76,7 +76,7 @@
         </item>
         <item>
          <property name="text">
-          <string>Squre</string>
+          <string>Square</string>
          </property>
         </item>
         <item>
@@ -167,18 +167,24 @@
          </item>
          <item row="1" column="0">
           <widget class="QSpinBox" name="spinBox_alpa">
+           <property name="minimum">
+            <number>0</number>
+           </property>
            <property name="maximum">
-            <number>100</number>
+            <number>127</number>
            </property>
            <property name="value">
-            <number>100</number>
+            <number>127</number>
            </property>
           </widget>
          </item>
          <item row="1" column="1">
           <widget class="QSpinBox" name="spinBox_red">
+           <property name="minimum">
+            <number>0</number>
+           </property>
            <property name="maximum">
-            <number>100</number>
+            <number>127</number>
            </property>
            <property name="value">
             <number>100</number>
@@ -187,15 +193,24 @@
          </item>
          <item row="1" column="2">
           <widget class="QSpinBox" name="spinBox_green">
+           <property name="minimum">
+            <number>0</number>
+           </property>
            <property name="maximum">
-            <number>100</number>
+            <number>127</number>
            </property>
           </widget>
          </item>
          <item row="1" column="3">
           <widget class="QSpinBox" name="spinBox_blue">
+           <property name="minimum">
+            <number>0</number>
+           </property>
            <property name="maximum">
-            <number>100</number>
+            <number>127</number>
+           </property>
+           <property name="value">
+            <number>30</number>
            </property>
           </widget>
          </item>
@@ -264,34 +279,37 @@
       <item row="1" column="0">
        <widget class="QSpinBox" name="spinBox_alpaEffect">
         <property name="maximum">
-         <number>100</number>
+         <number>127</number>
         </property>
         <property name="value">
-         <number>100</number>
+         <number>127</number>
         </property>
        </widget>
       </item>
       <item row="1" column="1">
        <widget class="QSpinBox" name="spinBox_redEffect">
         <property name="maximum">
-         <number>100</number>
+         <number>127</number>
         </property>
        </widget>
       </item>
       <item row="1" column="2">
        <widget class="QSpinBox" name="spinBox_greenEffect">
         <property name="maximum">
-         <number>100</number>
+         <number>127</number>
+        </property>
+        <property name="value">
+         <number>55</number>
         </property>
        </widget>
       </item>
       <item row="1" column="3">
        <widget class="QSpinBox" name="spinBox_blueEffect">
         <property name="maximum">
-         <number>100</number>
+         <number>127</number>
         </property>
         <property name="value">
-         <number>100</number>
+         <number>127</number>
         </property>
        </widget>
       </item>

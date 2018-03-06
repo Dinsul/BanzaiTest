@@ -14,15 +14,16 @@ class Figure
 {
 public:
     //Oops! OpenGL use range 0-100 for coding colors
-    Figure(QString name, QPoint position, uint32_t color = 0x64640000, float lineWidth = 2);
-    Figure(QString name, int x, int y, uint32_t color = 0x64640000, float lineWidth = 2);
+    Figure(QString name, QPoint position, uint32_t color = 0x7F007F00, float lineWidth = 2);
+    Figure(QString name, int x, int y, uint32_t color = 0x7F007F00, float lineWidth = 2);
     virtual ~Figure();
 
     enum FigureType{
         FtCustom = 0,
         FtCircle,
         FtSquare,
-        FtTriangle
+        FtTriangle,
+        FtCount
     };
 
     virtual void draw();

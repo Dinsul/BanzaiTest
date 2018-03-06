@@ -27,10 +27,9 @@ private:
     QVector<Figure*> _figures;
 
     void createRandomFigure();
-    int  getRandom(int min, int max);
 
 private slots:
-    void rowChanged(QModelIndex index);
+    void elementWasClicked(QModelIndex index);
     void editElement(QModelIndex index);
     void on_toolButton_add_clicked();
     void on_toolButton_remove_clicked();

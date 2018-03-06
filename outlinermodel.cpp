@@ -37,7 +37,7 @@ QVariant OutlinerModel::data(const QModelIndex &index, int role) const
         if (index.row() %2 == 0)
             color.setRgb(0xF0,0xF0,0xF0);
         else
-            color.setRgb(0xC0,0xC0,0xC0);
+            color.setRgb(0xFF,0xFF,0xFF);
 
         return QVariant(color);
     }
@@ -48,7 +48,6 @@ QVariant OutlinerModel::data(const QModelIndex &index, int role) const
 
         return QVariant(currentFigure->name());
     }
-
     else if (role == Qt::EditRole)
     {
         Figure *currentFigure = _storage->at(index.row());
@@ -120,7 +119,7 @@ bool OutlinerModel::insertRows(int row, int count, const QModelIndex &parent)
 
     Figure *newFigure = NULL;
 
-    DialogNewFigure dialog(&newFigure);
+    DialogNewFigure dialog(_storage, -1);
     dialog.exec();
 
     if (newFigure)
